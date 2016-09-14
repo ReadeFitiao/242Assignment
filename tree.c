@@ -32,7 +32,6 @@ struct tree_node{
  */
 tree tree_new(tree_t type){
     tree_type = type;
-    printf("type is %u\n",tree_type);
     return NULL;
 }
 /**
@@ -270,9 +269,9 @@ static void tree_output_dot_aux(tree t, FILE *out) {
  * @param out the stream to write the DOT description to.
  */
 void tree_output_dot(tree t, FILE *out) {
+    printf("Creating dot file 'tree-view.dot'\n");
     fprintf(out, "digraph tree {\nnode [shape = Mrecord, penwidth = 2];\n");
     tree_output_dot_aux(t, out);
     fprintf(out, "}\n");
 }
-
 
