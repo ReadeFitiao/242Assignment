@@ -32,6 +32,7 @@ struct tree_node{
  */
 tree tree_new(tree_t type){
     tree_type = type;
+    printf("type is %u\n",tree_type);
     return NULL;
 }
 /**
@@ -45,8 +46,8 @@ tree tree_insert(tree t, char *str){
         t = emalloc(sizeof *t);
         t->key = emalloc((strlen(str)+1)*sizeof str[0]);
         strcpy(t->key,str);
-        t->left = tree_new(RBT);
-        t->right = tree_new(RBT);
+        t->left = tree_new(tree_type);
+        t->right = tree_new(tree_type);
         t->frequency = 1;
         if(tree_type == RBT){
             t->colour = RED;
@@ -104,7 +105,9 @@ void tree_inorder(tree t, void f(char *str)){
 int tree_search(tree t, char *str){
     if(t == NULL){
         return 0;
-    }else if(strcmp(t->key,str) == 0){
+    }
+
+    if(strcmp(t->key,str) == 0){
         return 1;
     }else if(strcmp(t->key,str) > 0){
         return tree_search(t->left,str);
@@ -271,4 +274,5 @@ void tree_output_dot(tree t, FILE *out) {
     tree_output_dot_aux(t, out);
     fprintf(out, "}\n");
 }
+
 
