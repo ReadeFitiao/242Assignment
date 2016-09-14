@@ -106,9 +106,7 @@ int main(int argc, char **argv){
     dot = 0;
     type = BST;
 
-
     options(argc, argv);
-
     t = tree_new(type);
 
     fill_start = clock();
@@ -116,6 +114,7 @@ int main(int argc, char **argv){
         t = tree_insert(t, word);
     }
     fill_end = clock();
+    set_colour(t);
 
     if(spellcheck>0){
         file = fopen(spellcheck_file,"r");
@@ -155,4 +154,5 @@ int main(int argc, char **argv){
 
     return EXIT_SUCCESS;
 }
+
 
