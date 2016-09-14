@@ -19,6 +19,9 @@ tree_t type;
 int tree_depth(tree t);
 void tree_output_dot(tree t, FILE *out);
 
+/**
+ * Prints a help notice when "-h" is passed as an argument.
+ */
 static void help_notice() {
     fprintf(stderr,"\n\n%s%s%s",
             "When running this BST/RBT program from the command line, we have\n"
@@ -44,6 +47,11 @@ static void help_notice() {
             "                  the program.\n\n");
 }
 
+/**
+ * Processes the commandline arguments to determine options.
+ * @param argc number of arguments
+ * @param argv string of arguments
+ */ 
 static void options(int argc, char **argv){
     const char *optstring = "c:df:orh";
     char option;
@@ -76,7 +84,12 @@ static void options(int argc, char **argv){
         }
     }
 }
-
+/**
+ *Main file,initialises and fills tree, performs spellcheck if selected.
+ * @param argc the number of arguments from terminal.
+ * @param argv string of arguments.
+ * @return an exit-success notifier.
+ */ 
 int main(int argc, char **argv){
     /*Declare variables.*/
     FILE *file;
@@ -142,3 +155,4 @@ int main(int argc, char **argv){
 
     return EXIT_SUCCESS;
 }
+
