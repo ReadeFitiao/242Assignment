@@ -24,6 +24,10 @@ struct tree_node{
     int frequency;
 };
 
+void set_colour(tree t){
+    t->colour = BLACK;
+}
+
 
 /**
  * Initilises the type of tree and returns a null pointer as an empty tree.
@@ -274,4 +278,5 @@ void tree_output_dot(tree t, FILE *out) {
     tree_output_dot_aux(t, out);
     fprintf(out, "}\n");
 }
+
 
