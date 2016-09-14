@@ -5,6 +5,7 @@ typedef struct tree_node *tree;
 typedef enum { RED, BLACK } rbt_colour;
 typedef enum tree_e { BST, RBT } tree_t;
 
+extern void  set_colour(tree t);
 extern void  tree_free(tree t);
 extern void  tree_inorder(tree t, void f(char *str));
 extern tree  tree_insert(tree t, char *str);
