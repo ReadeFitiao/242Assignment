@@ -24,11 +24,22 @@ struct tree_node{
     int frequency;
 };
 
+
+/**
+ * Initilises the type of tree and returns a null pointer as an empty tree.
+ * @param type This is the type of tree, it can either be RBT or BST.
+ * @return tree Null is returned to represent an empty tree.
+ */
 tree tree_new(tree_t type){
     tree_type = type;
     return NULL;
 }
-
+/**
+ * Inserts a string in to the right place in the respective tree.
+ * @param t The tree that the string is to be added to.
+ * @param str the string that is to be added to the tree.
+ * @return tree the tree with the added string.
+ */
 tree tree_insert(tree t, char *str){
     if(t==NULL){
         t = emalloc(sizeof *t);
@@ -54,7 +65,12 @@ tree tree_insert(tree t, char *str){
     }
     return t;
 }
-
+/**
+ * A recursive preorder traversal of the tree.
+ * @param t the tree to be traversed
+ * @param void f(char *str) a function pointer, returns void and takes a string.
+ * this is done primarily with the intenting of passing a print function.
+ */
 void tree_preorder(tree t, void f(char *str)){
     if(t == NULL){
         return;
@@ -64,7 +80,12 @@ void tree_preorder(tree t, void f(char *str)){
     tree_preorder(t->left,f);
     tree_preorder(t->right,f);
 }
-
+/**
+ * A recursive preorder traversal of the tree.
+ * @param t the tree to be traversed.
+ * @param void f(char *str) a function pointer, returns void and takes a string.
+ * this is done primarily with the intenting of passing a print function.
+ */
 void tree_inorder(tree t, void f(char *str)){
     if(t == NULL){
         return;
@@ -74,7 +95,12 @@ void tree_inorder(tree t, void f(char *str)){
     f(t->key);
     tree_inorder(t->right,f);
 }
-
+/**
+ * Recursively finds whether a given string is in a given tree.
+ * @param t the tree to be searched.
+ * @param str the string that needs to be found.
+ * @return 0 if not found, 1 if found.
+ */
 int tree_search(tree t, char *str){
     if(t == NULL){
         return 0;
@@ -86,7 +112,10 @@ int tree_search(tree t, char *str){
         return tree_search(t->right,str);
     }
 }
-
+/**
+ * Frees the memory allocated for a tree.
+ * @param t the tree to be freed
+ */
 void tree_free(tree t){
     if(t->left != NULL){
         tree_free(t->left);
@@ -98,7 +127,10 @@ void tree_free(tree t){
     free(t);
 }
 
-
+/**
+ * A left rotation that preserves in-order traversal
+ * @param t the tree to be rotated
+ */
 static tree left_rotate(tree t){
     tree temp = t;
     t = temp->right;
@@ -106,7 +138,10 @@ static tree left_rotate(tree t){
     t->left = temp;
     return t;
 }
-
+/**
+ * A right rotation that preserves in-order traversal
+ * @param t the tree to be rotated
+ */
 static tree right_rotate(tree t){
     tree temp = t;
     t = temp->left;
@@ -114,7 +149,10 @@ static tree right_rotate(tree t){
     t->right = temp;
     return t;
 }
-
+/**
+ * Rearranges the nodes to maintain balance.
+ * @param t the tree that needs to be rearranged.
+ */
 static tree tree_fix(tree t){
     if(IS_RED(t->left) && IS_RED(t->left->left)){
         if(IS_RED(t->right)){
@@ -173,7 +211,11 @@ static tree tree_fix(tree t){
 
     return t;
 }
-
+/**
+ * Recursively finds the maximum depth of a tree.
+ * @param the tree to be analysed for depth.
+ * @return the maximum depth of a tree.
+ */
 int tree_depth(tree t){
     if(t->left == NULL && t->right == NULL){
         return 0;
