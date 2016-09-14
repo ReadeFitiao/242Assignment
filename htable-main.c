@@ -18,7 +18,7 @@ hashing_t method;
 
 /*Function declarations*/
 void htable_print_entire_table(htable h);
-static void print_stats_line(htable h, FILE *stream, int percent_full);
+void htable_print_stats(htable h, FILE *stream, int num_stats);
 
 static void help_notice(){
     fprintf(stderr,"\n\n%s%s%s%s%s",
