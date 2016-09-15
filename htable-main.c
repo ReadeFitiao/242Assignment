@@ -17,8 +17,8 @@ int print_stats;
 hashing_t method;
 
 /**
-   Displays help notice.
-**/
+ * Displays help notice.
+ */
 static void help_notice(){
     fprintf(stderr,"%s%s%s",
             "Usage: ./sample-htable [OPTION]... <STDIN>\n\n"
@@ -40,10 +40,10 @@ static void help_notice(){
 }
 
 /**
-   Sets the options based on the arguments that the user has inputted.
-   @param argc the number of arguments
-   @param **arcv the arguments
-**/
+ * Processes the commandline arguments to determine options.
+ * @param argc the number of arguments.
+ * @param **arcv the string of arguments.
+ */
 static void options(int argc, char **argv){
     const char *optstring = "c:deps:t:h";
     char option;
@@ -82,10 +82,10 @@ static void options(int argc, char **argv){
 }
 
 /**
-   Finds if a number is prime.
-   @param n the number to be tested
-   @return true if prime fales if not
-**/
+ *Finds if a number is prime.
+ * @param n the number to be tested.
+ * @return true if prime fales if not.
+ */
 int isPrime(int n){
     int i,j=0;
     for(i=1; i<=n; i++) {
@@ -95,7 +95,13 @@ int isPrime(int n){
     return(j == 2);
 }
 
-
+/**
+ *Main method, initilises, fills and proforms
+ *options selected on htable.
+ * @param argc the number of arguments.
+ * @param argv the string of arguments.
+ * @return an exit-success notifier.
+ */
 int main(int argc, char **argv){
     /*Declare variables.*/
     FILE *file;

@@ -5,13 +5,13 @@
 #include "mylib.h"
 
 /**
-   num_keys is the number of keys the htable is currnetly holding.
-   capacity is how amny keys the htable can hold.
-   *frequencies stores the frequencies of different keys.
-   *stats stores the number of collisions before an empty space was found.
-   **keys stores the keys
-   method is either linear probing or double hashing.
-**/
+ * num_keys is the number of keys the htable is currnetly holding.
+ * capacity is how amny keys the htable can hold.
+ * *frequencies stores the frequencies of different keys.
+ * *stats stores the number of collisions before an empty space was found.
+ * **keys stores the keys
+ * method is either linear probing or double hashing.
+ */
 struct htablerec{
     int num_keys;
     int capacity;
@@ -22,13 +22,13 @@ struct htablerec{
 };
 
 /**
-   Creates a new htable, frequencies array and stats array.
-   Decides what collision method is used.
-   Allocates memory and sets their values to null.
-   @param capacity how amny keys the htable can store
-   @param hash_type either linear probing or double hashing
-   @return the created htable
-**/
+ * Creates a new htable, frequencies array and stats array.
+ * Decides what collision method is used.
+ * Allocates memory and sets their values to null.
+ * @param capacity how amny keys the htable can store.
+ * @param hash_type either linear probing or double hashing.
+ * @return the created htable.
+ */
 htable htable_new(int capacity, hashing_t hash_type){
     int i;
     htable newhtable = emalloc(sizeof *newhtable);
@@ -50,9 +50,9 @@ htable htable_new(int capacity, hashing_t hash_type){
 }
 
 /**
-   Frees all memory allocated to the htable.
-   @param h the htable to be freed
-**/
+ * Frees all memory allocated to the htable.
+ * @param h the htable to be freed.
+ */
 void htable_free(htable h){
     int i;	
     for(i=0;i<h->capacity;i++){
@@ -65,10 +65,10 @@ void htable_free(htable h){
 }
 
 /**
-   Converts a given word to an integer.
-   @param *word the word to be converted
-   @return the int that has been made
-**/
+ * Converts a given word to an integer.
+ * @param *word the word to be converted.
+ * @return the int that has been made.
+ */
 static unsigned int htable_word_to_int(char *word) {
     unsigned int result = 0;	
     while (*word != '\0') {
@@ -78,21 +78,21 @@ static unsigned int htable_word_to_int(char *word) {
 }
 
 /**
-   Figures out the step for double hashing.
-   @param h the htable
-   @param i_key the number converted from a string
-   @return the step value
-**/
+ * Figures out the step for double hashing.
+ * @param h the htable.
+ * @param i_key the number converted from a string.
+ * @return the step value.
+ */
 static unsigned int htable_step(htable h, unsigned int i_key) {
     return 1 + (i_key % (h->capacity - 1));
 }
 
 /**
-   Inserts a string into the htable.
-   @param h the htable to be inserted into
-   @param *str the string to be insertes
-   @return the frequency of the string 0 if hatble is full
-**/
+ * Inserts a string into the htable.
+ * @param h the htable to be inserted into.
+ * @param *str the string to be insertes.
+ * @return the frequency of the string 0 if hatble is full.
+ */
 int htable_insert(htable h, char *str){
     unsigned int strvalue = htable_word_to_int(str);
     unsigned int keyaddress = strvalue % h->capacity;
@@ -122,9 +122,9 @@ int htable_insert(htable h, char *str){
 }
 
 /**
-   Prints the htable index, frequencies, stats and keys.
-   @param h the table to be printed
- **/
+ * Prints the htable index, frequencies, stats and keys.
+ * @param h the table to be printed.
+ */
 void htable_print_entire_table(htable h){
     int i;
     printf("  Pos  Freq  Stats  Word\n");
@@ -141,11 +141,11 @@ void htable_print_entire_table(htable h){
 }
 
 /**
-   Searches the htable for a spicific string.
-   @param h the htable to be searched
-   @param *str the string to be searched for
-   @return the fthe ammount of times the string has been stored
-**/
+ * Searches the htable for a spicific string.
+ * @param h the htable to be searched.
+ * @param *str the string to be searched for.
+ * @return the fthe ammount of times the string has been stored.
+ */
 int htable_search(htable h, char *str){
     unsigned int strvalue = htable_word_to_int(str);
     unsigned int keyaddress = strvalue % h->capacity;
