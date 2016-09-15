@@ -65,7 +65,6 @@ static void options(int argc, char **argv){
                 snapshots = 10;
                 break;
             case 's':
-                /*print_stats = 1;*/
                 snapshots = atoi(optarg);
                 break;
             case 't':
