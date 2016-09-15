@@ -110,15 +110,16 @@ int main(int argc, char **argv){
     clock_t fill_start, fill_end, search_start, search_end;
     int unknown_words;
 
-    /*Set default flags and filenames*/
+    /*Set default flags and values*/
     unknown_words = 0;
-    unknown_words = 0;    spellcheck = 0;
-    unknown_words = 0;    print_table = 0;
-    unknown_words = 0;    print_stats = 0;
-    unknown_words = 0;    table_size = 113;
-    unknown_words = 0;    method = LINEAR_P;
-    unknown_words = 0;
-    unknown_words = 0;    options(argc, argv);
+    spellcheck = 0;
+    print_table = 0;
+    print_stats = 0;
+    table_size = 113;
+    method = LINEAR_P;
+
+    /*Get flags and values from user*/
+    options(argc, argv);
 
     /*If the user has set a table size make it prime*/
     if(table_size != 113){
