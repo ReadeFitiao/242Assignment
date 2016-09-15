@@ -24,15 +24,16 @@ htable htable_new(int capacity, hashing_t hash_type){
     newhtable->method = hash_type;
     newhtable->capacity = capacity;
     newhtable->num_keys = 0;
-    newhtable->frequencies = emalloc(capacity * sizeof
+    newhtable->frequencies = emalloc(newhtable->capacity * sizeof
                                      newhtable->frequencies[0]);
-    newhtable->keys = emalloc(capacity * sizeof newhtable->keys[0]);
+    newhtable->stats = emalloc(newhtable->capacity * sizeof newhtable->stats[0]);
+    newhtable->keys = emalloc(newhtable->capacity * sizeof newhtable->keys[0]);
                                   
+
     for(i=0;i<capacity;i++){
         newhtable->frequencies[i] = 0;
         newhtable->keys[i] = NULL;
     }
-
     return newhtable;
 }
 
@@ -68,25 +69,26 @@ int htable_insert(htable h, char *str){
     unsigned int step = 1;                    
 	
     int i = 0;
-
     if(h->method == DOUBLE_H){
         step = htable_step(h, strvalue);
     }
 
     while(i<h->capacity){
-        if(h->frequencies[keyaddress] == 0){
+        if(h->keys[keyaddress] == NULL){
             h->keys[keyaddress] = emalloc((strlen(str)+1)*sizeof str[0]);
             strcpy(h->keys[keyaddress], str);
             h->frequencies[keyaddress]++;
             h->stats[h->num_keys] = i;
             h->num_keys++;
-            return 1;
-        } else if(strcmp(h->keys[keyaddress],str)==0){
+            return h->frequencies[keyaddress];
+        } else if(strcmp(str, h->keys[keyaddress])==0){
             h->frequencies[keyaddress]++;
             return h->frequencies[keyaddress];
+        } else{
+            keyaddress+=step;
+            keyaddress%= h->capacity;
+            i++;
         }
-        keyaddress=(keyaddress+step)% h->capacity;
-        i++;
     }
     return 0;
 }
@@ -108,7 +110,7 @@ void htable_print_entire_table(htable h){
                    h->stats[i],h->keys[i]);
         }else{
             printf("%5d %5d %5d   %s\n", i, h->frequencies[i],
-                   h->stats[i],"[EMPTY]");
+                   h->stats[i], "");
         }
     }
 }

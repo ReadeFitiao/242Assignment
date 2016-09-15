@@ -87,6 +87,16 @@ static void options(int argc, char **argv){
     }
 }
 
+int isPrime(int n){
+    int i,j=0;
+    for(i=1; i<=n; i++) {
+        if(n%i == 0)
+            j++;
+    }
+    return(j == 2);
+}
+
+
 int main(int argc, char **argv){
     /*Declare variables.*/
     FILE *file;
@@ -97,20 +107,26 @@ int main(int argc, char **argv){
 
     /*Set default flags and filenames*/
     unknown_words = 0;
-    spellcheck = 0;
-    print_table = 0;
-    print_stats = 0;
-    table_size = 113;
-    method = LINEAR_P;
-
-    options(argc, argv);
+    unknown_words = 0;    spellcheck = 0;
+    unknown_words = 0;    print_table = 0;
+    unknown_words = 0;    print_stats = 0;
+    unknown_words = 0;    table_size = 113;
+    unknown_words = 0;    method = LINEAR_P;
+    unknown_words = 0;
+    unknown_words = 0;    options(argc, argv);
 
     if(table_size != 113){
-
+        while(1){
+            if(isPrime(table_size)){
+                break;
+            }else{
+                table_size++;
+            }
+        }
     }
 
     h = htable_new(table_size, method);
-
+ 
     fill_start = clock();
     while (getword(word, sizeof word, stdin) != EOF){
         htable_insert(h, word);
