@@ -5,6 +5,11 @@
 
 #include "mylib.h"
 
+/**
+   Allocates memory.
+   @param s the size of the memory block to be allocated
+   @return a pointer to the memory block
+**/
 void *emalloc(size_t s) {
     void *result = malloc(s);
     if (NULL == result){
@@ -14,6 +19,9 @@ void *emalloc(size_t s) {
     return result;
 }
 
+/**
+   Gets word from a file.
+**/
 int getword(char *s, int limit, FILE *stream) {
 	int c;
 	char *w = s;

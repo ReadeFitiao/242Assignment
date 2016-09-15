@@ -16,40 +16,34 @@ int print_table;
 int print_stats;
 hashing_t method;
 
-/*Function declarations*/
-void htable_print_entire_table(htable h);
-void htable_print_stats(htable h, FILE *stream, int num_stats);
-
+/**
+   Displays help notice.
+**/
 static void help_notice(){
-    fprintf(stderr,"\n\n%s%s%s%s%s",
-            "When running this BST/RBT program from the command line, we have\n"
-            "a number of options regarding output and output location.\n"
-            "Appending certain tags to our command line argument allows us\n"
-            "to make the following changes: \n\n"
-            "-c [filename]     Check the spelling of words in filename\n"
-            "                  using words read from stdin as the\n"
-            "                  dictionary. Print all unknown words to\n",
-            "                  stdout. Print timing information and\n"
-            "                  unknown word count to stderr. When this\n"
-            "                  option is given then the -p option\n"
-            "                  is ignored.\n\n",
-            "-d                Use double hashing as the collision resolution\n"            "                  strategy (linear probing is the default).\n\n"
-            "-e                Display entire contents of hash table on\n"
-            "                  stderr using the format string\n"
-            "                  '%5d %5d %5d   %s\n' to display the index,\n",
-            "                  frequency, stats, and the key if it exists.\n\n"
-            "-p                Print stats info using the functions provided\n"
-            "                  in print-stats.txt instead of printing the\n"
-            "                  frequencies and words.\n\n"
-            "-s [snapshots]    Display up to the given number of stats when\n",
-            "                  given -p as an argument. If the table is not\n"
-            "                  full then fewer snapshots will be displayed.\n"
-            "                  Snapshots with 0 entries are not shown.\n\n"
-            "-t [tablesize]    Set the hastable size.\n\n"
-            "-h                Print this help message describing how to use\n "
-            "                  the program.\n\n");
+    fprintf(stderr,"%s%s%s",
+            "Usage: ./sample-htable [OPTION]... <STDIN>\n\n"
+
+            "Perform various operations using a hash table.  By default, words are\n"
+            "read from stdin and added to the hash table, before being printed out\n"
+            "alongside their frequencies to stdout.\n\n",
+
+            "-c FILENAME  Check spelling of words in FILENAME using words\n"
+            "from stdin as dictionary.  Print unknown words to\n"
+            "stdout, timing info & count to stderr (ignore -p)\n"
+            "-d           Use double hashing (linear probing is the default)\n"
+            "-e           Display entire contents of hash table on stderr\n",
+            "-p           Print stats info instead of frequencies & words\n"
+            "-s SNAPSHOTS Show SNAPSHOTS stats snapshots (if -p is used)\n"
+            "-t TABLESIZE Use the first prime >= TABLESIZE as htable size\n\n"
+
+            "-h           Display this messagen\n");
 }
 
+/**
+   Sets the options based on the arguments that the user has inputted.
+   @param argc the number of arguments
+   @param **arcv the arguments
+**/
 static void options(int argc, char **argv){
     const char *optstring = "c:deps:t:h";
     char option;
@@ -68,9 +62,10 @@ static void options(int argc, char **argv){
                 break;
             case 'p':
                 print_stats = 1;
+                snapshots = 10;
                 break;
             case 's':
-                print_stats = 1;
+                /*print_stats = 1;*/
                 snapshots = atoi(optarg);
                 break;
             case 't':
@@ -87,6 +82,11 @@ static void options(int argc, char **argv){
     }
 }
 
+/**
+   Finds if a number is prime.
+   @param n the number to be tested
+   @return true if prime fales if not
+**/
 int isPrime(int n){
     int i,j=0;
     for(i=1; i<=n; i++) {
@@ -115,6 +115,7 @@ int main(int argc, char **argv){
     unknown_words = 0;
     unknown_words = 0;    options(argc, argv);
 
+    /*If the user has set a table size make it prime*/
     if(table_size != 113){
         while(1){
             if(isPrime(table_size)){
