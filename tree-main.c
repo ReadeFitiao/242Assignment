@@ -23,28 +23,22 @@ void tree_output_dot(tree t, FILE *out);
  * Prints a help notice when "-h" is passed as an argument.
  */
 static void help_notice() {
-    fprintf(stderr,"\n\n%s%s%s",
-            "When running this BST/RBT program from the command line, we have\n"
-            "a number of options regarding output and output location.\n"
-            "Appending certain tags to our command line argument allows us\n"
-            "to make the following changes: \n\n"
-            "-c [filename]     Check the spelling of words in filename\n"
-            "                  using words read from stdin as the\n"
-            "                  dictionary. Print all unknown words to\n",
-            "                  stdout. Print timing information and\n"
-            "                  unknown word count to stderr. When this\n"
-            "                  option is given then the -d/-o options\n"
-            "                  is ignored.\n\n"
-            "-d                Print the depth of the tree to stdout\n"
-            "                  and don’t do anything else.\n\n"
-            "-f [filename]     Write the 'dot' output to filename instead of\n"
-            "                  the  default filename i -o is given.\n\n"
-            "-o                Output a representation of the tree in 'dot'\n",
-            "                  form to the file 'tree-view.dot'\n\n"
-            "-r                Make the tree an RBT instead of the default\n"
-            "                  BST.\n\n"
-            "-h                Print this help message describing how to use\n "
-            "                  the program.\n\n");
+    fprintf(stderr,"%s%s%s",
+            "Usage: ./sample-tree [OPTION]... <STDIN>\n\n"
+
+            "Perform various operations using a binary tree.  By default,\n"
+            "words are read from stdin and added to the tree, before being\n"
+            "printed out alongside their frequencies to stdout.\n\n",
+
+            " -c FILENAME Check spelling of words in FILENAME using words\n"
+            "             read from stdin as the dictionary.  Print timing\n"
+            "             info & unknown words to stderr (ignore -d & -o)\n"
+            " -d          Only print the tree depth (ignore -o)\n",
+            " -f FILENAME Write DOT output to FILENAME (if -o given)\n"
+            " -o          Output the tree in DOT form to file 'tree-view.dot'\n"
+            " -r          Make the tree an RBT (the default is a BST)\n\n"
+
+            " -h          Print this message\n");
 }
 
 /**

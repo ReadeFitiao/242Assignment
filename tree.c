@@ -10,8 +10,6 @@
 
 static tree_t tree_type;
 
-int tree_depth(tree t);
-void tree_output_dot(tree t, FILE *out);
 static tree left_rotate(tree t);
 static tree right_rotate(tree t);
 static tree tree_fix(tree t);

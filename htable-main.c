@@ -27,16 +27,16 @@ static void help_notice(){
             "words are read from stdin and added to the hash table, before\n"
             "being printed out alongside their frequencies to stdout.\n\n",
 
-            "-c FILENAME  Check spelling of words in FILENAME using words\n"
-            "from stdin as dictionary.  Print unknown words to\n"
-            "stdout, timing info & count to stderr (ignore -p)\n"
-            "-d           Use double hashing (linear probing is the default)\n"
-            "-e           Display entire contents of hash table on stderr\n",
-            "-p           Print stats info instead of frequencies & words\n"
-            "-s SNAPSHOTS Show SNAPSHOTS stats snapshots (if -p is used)\n"
-            "-t TABLESIZE Use the first prime >= TABLESIZE as htable size\n\n"
+            " -c FILENAME  Check spelling of words in FILENAME using words\n"
+            "              from stdin as dictionary.  Print unknown words to\n"
+            "              stdout, timing info & count to stderr (ignore -p)\n"
+            " -d           Use double hashing (linear probing is the default)\n"
+            " -e           Display entire contents of hash table on stderr\n",
+            " -p           Print stats info instead of frequencies & words\n"
+            " -s SNAPSHOTS Show SNAPSHOTS stats snapshots (if -p is used)\n"
+            " -t TABLESIZE Use the first prime >= TABLESIZE as htable size\n\n"
 
-            "-h           Display this messagen\n");
+            " -h           Display this messagen\n");
 }
 
 /**
