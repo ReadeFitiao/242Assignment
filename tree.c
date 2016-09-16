@@ -270,8 +270,8 @@ static void tree_output_dot_aux(tree t, FILE *out) {
  * @param t the tree to output the DOT description of.
  * @param out the stream to write the DOT description to.
  */
-void tree_output_dot(tree t, FILE *out) {
-    printf("Creating dot file 'tree-view.dot'\n");
+void tree_output_dot(tree t, FILE *out, char *filename) {
+    printf("Creating dot file '%s'\n", filename);
     fprintf(out, "digraph tree {\nnode [shape = Mrecord, penwidth = 2];\n");
     tree_output_dot_aux(t, out);
     fprintf(out, "}\n");
