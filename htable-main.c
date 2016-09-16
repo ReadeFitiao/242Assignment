@@ -23,9 +23,9 @@ static void help_notice(){
     fprintf(stderr,"%s%s%s",
             "Usage: ./sample-htable [OPTION]... <STDIN>\n\n"
 
-            "Perform various operations using a hash table.  By default, words are\n"
-            "read from stdin and added to the hash table, before being printed out\n"
-            "alongside their frequencies to stdout.\n\n",
+            "Perform various operations using a hash table.  By default,\n"
+            "words are read from stdin and added to the hash table, before\n"
+            "being printed out alongside their frequencies to stdout.\n\n",
 
             "-c FILENAME  Check spelling of words in FILENAME using words\n"
             "from stdin as dictionary.  Print unknown words to\n"
