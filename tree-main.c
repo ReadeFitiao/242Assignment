@@ -15,10 +15,6 @@ int print_depth;
 int dot;
 tree_t type;
 
-/*Function declarations*/
-int tree_depth(tree t);
-void tree_output_dot(tree t, FILE *out);
-
 /**
  * Prints a help notice when "-h" is passed as an argument.
  */
@@ -142,12 +138,10 @@ int main(int argc, char **argv){
 
     if(dot>0){
         file = fopen(dot_file, "a+");
-        tree_output_dot(t, file);
+        tree_output_dot(t, file, dot_file);
     }
 
     tree_free(t);
 
     return EXIT_SUCCESS;
 }
-
-
