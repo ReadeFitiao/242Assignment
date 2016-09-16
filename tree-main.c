@@ -137,6 +137,7 @@ int main(int argc, char **argv){
 
     if(print_depth > 0){
         printf("%d\n",tree_depth(t));
+        dot = 0;
     }
 
     if(dot>0){
